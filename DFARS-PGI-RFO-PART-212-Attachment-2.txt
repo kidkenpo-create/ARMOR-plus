@@ -1,0 +1,297 @@
+PGI 212-ACQUISITION OF COMMERCIAL PRODUCTS AND COMMERCIAL SERVICES
+
+PGI 212.1-PRESOLICITATION
+
+PGI 212.001-70  Applicability.
+
+	(b)  Commercial product or commercial service determination.
+
+			(A)  Making the commercial product or commercial service determination.
+
+				(1)  Before making a commercial product or commercial service 
+determination, the contracting officer must search the DoD Commercial Item Database at 
+https://piee.eb.mil for the item and an associated commercial product or commercial service 
+determination or the decision that the item is not commercial in accordance with the commercial product or commercial service definition at FAR 2.101.
+
+				(2)  In accordance with 10 U.S.C. 3456(b)(1), the contracting officer may-
+
+					(i)  Request support from the Defense Contract Management Agency (DCMA) by sending an email to DCMA Commercial Item Group (CIG) at dcma.boston-ma.eastern-rc.mbx.Commercial@mail.mil;
+
+					(ii)  Request support from the cognizant Defense Contract Audit Agency (DCAA) office;
+
+					(iii)  Request support from other appropriate experts in DoD such as program office technical evaluators, program managers, cognizant engineers, or other contracting officers; or
+
+					(iv)  Consider the views of appropriate public and private sector entities such as documents provided by the contractor asserting commerciality to include technical drawings, product or catalog descriptions, or national stock numbers.
+
+				(3)  The contracting officer may make the commercial product or 
+commercial service determination or the decision that the item is other than commercial 
+in accordance with the commercial product or commercial service definition at FAR 2.101 or request a DCMA CIG contracting officer make the determination or the decision 
+that the product or service is other than commercial in accordance with the commercial 
+product or commercial service definition at FAR 2.101 by submitting a request to dcma.boston-ma.eastern-rc.mbx.Commercial@mail.mil.  The contracting officer may withdraw the request at any point prior to the determination being made.
+
+			(B)  Documenting the commercial product or commercial service determination.
+
+				(1)  The contracting officer making the determination must document the 
+market research and rationale supporting a conclusion that the product or service is commercial or is other than commercial and include it in the contract file.
+
+				(2)  Particular care must be taken when documenting determinations 
+involving items that are of a type customarily used by the general public or by nongovernmental entities, modifications of a type customarily available in the marketplace, and items only offered for sale, lease, or license to the general public but not yet actually sold, leased, or licensed.  In these situations, the documentation must clearly detail the particulars of the items and modifications of a type and sales offers.  When such items lack sufficient market pricing information, additional diligence must be given to determinations that prices are fair and reasonable as required by FAR subpart 15.4.
+
+				(3)  The contracting officer must include the part number, the national stock 
+number, or both, as applicable, in the commercial product or commercial service determination or the decision that the product or service does not meet the commercial 
+product or commercial service definition at FAR 2.101.
+
+				(4)  The contracting officer must include the commercial product or commercial service determination or the decision that the product or service does not 
+meet the commercial product or commercial service definition at FAR 2.101 in the contract file.
+
+			(C)  DoD commercial item database.  In accordance with 10 U.S.C. 3456(b)(2), within 30 days of contract award, the contracting officer making the 
+determination must upload the signed commercial product or service determination or the 
+decision that the item does not meet the commercial product or commercial service definition at FAR 2.101 to the DoD Commercial Item Database at https://piee.eb.mil.  The only documentation that is required to be uploaded to the database is the commercial 
+product or service determination or the decision that the item is other than commercial. 
+Contracting officers must avoid uploading any data marked as proprietary or controlled unclassified information to the Commercial Item Database.  Additional information is available at https://www.dcma.mil/commercial-item-group/.
+
+			(D)  Prior commercial product or commercial service determination.
+
+				(1)  If a prior DoD commercial product or commercial service determination for the same product or service is made by a military department, defense agency, or 
+another component of DoD, contracting officers may presume that the prior commercial 
+product or commercial service determination must serve as a determination for subsequent procurements of such product or service, unless the process is followed to overturn the prior determination.
+
+				(2)  If the DoD Commercial Item Database contains a prior decision that a 
+product or service does not meet the definition of a commercial product or commercial 
+service at FAR 2.101, the contracting officer may use the prior decision to serve as the 
+decision for subsequent procurements of the same product or service.  To promote 
+consistent acquisition procedures across DoD, contracting officers should consult 
+contracting activities that regularly procure the product or service to understand the basis for determining that the product or service does not meet the commercial product or commercial service definition at FAR 2.101.
+
+		(v)  Commercial product or commercial service guidebook.  See the 
+Department of Defense Guidebook for Acquiring Commercial Items, Part A: Commercial Item Determination, for detailed guidance and practical examples on improving the 
+consistency and timeliness of commercial product or commercial service determinations to include a template for new commercial product or commercial service determinations and for general information related to commercial products or commercial services.
+
+	(d)(1)  This permissive authority is intended to enhance defense innovation and investment, enable DoD to acquire items that otherwise might not have been available, and create incentives for nontraditional defense contractors to do business with DoD.  It is not intended to recategorize current other than commercial products or commercial services; however, when appropriate, contracting officers may consider applying commercial product or commercial service procedures to the procurement of supplies and services from business segments that meet the definition of "nontraditional defense contractor" even though they have been established under traditional defense contractors.  The decision to apply commercial product and commercial service procedures to the procurement of supplies and services from nontraditional defense contractors does not require a commercial product or commercial service determination and does not mean the item is commercial.
+
+PGI 212.102-70  Promoting competition.
+For more information on the approaches that may be used to competitively fulfill DoD requirements, see the Office of the Under Secretary of Defense for Acquisition, Technology, and Logistics Guidelines for Creating and Maintaining a Competitive Environment for Supplies and Services in the Department of Defense,  https://www.acq.osd.mil/asda/dpc/cp/policy/competition.html.  
+
+PGI 212.2-SOLICITATION, EVALUATION, AND AWARD
+
+PGI 212.201  Solicitation procedures.
+
+PGI 212.201-1  Simplified procedures.
+
+	(e)  Other flexibilities
+
+		(3) Blanket purchase agreement.  Individual purchases for subsistence may be made at any dollar value; however, the contracting officer must satisfy the competition requirements of FAR part 6 for any action not using simplified acquisition procedures.
+
+PGI 212.203  Evaluation.
+
+	(a)  Factors.
+
+		(1)  Technical.
+
+			(A)  When acquiring transportation or transportation-related services, also consider evaluating offers in accordance with the criteria at 247.206(1).
+
+			(B)  For the acquisition of transportation in supply contracts that will include a significant requirement for transportation of items outside the contiguous United States, also evaluate offers in accordance with the criterion at 247.301-71.
+
+			(C)  For the direct purchase of ocean transportation services, also evaluate offers in accordance with the criteria at 247.573-2(c).
+
+PGI 212.4-MICRO PURCHASES
+
+PGI 212.401-70 General.
+
+	(b)(i)  Higher micro-purchase thresholds are authorized for purchases that have a clear and direct relationship to the support of a contingency operation; to facilitate defense against or recovery from cyber, nuclear, biological, chemical, or radiological attack; to support a request from the Secretary of State or the Administrator of the United States Agency for International Development to facilitate provision of international disaster assistance pursuant to 22 U.S.C. 2292 et seq.; or to support response to an emergency or major disaster (42 U.S.C. 5122).
+
+			(ii)  "United States," as used in this section, is defined in FAR 2.101.
+
+			(iii)  Except as provided in paragraph (iv) of this section, the following tables illustrate the higher micro-purchase threshold based on the physical location of the Government purchaser and, for services, the place of performance:
+
+				(A)  For supplies-
+
+Government Purchaser Physical LocationAuthorized Micro-Purchase ThresholdInside United States$25,000Outside United States$40,000
+				(B)  For services-
+
+Government Purchaser Physical LocationPlace of 
+PerformanceAuthorized 
+Micro-Purchase ThresholdInside United StatesInside or outside United States$25,000Outside United StatesInside United States$25,000Outside United StatesOutside United States$40,000
+			(iv)(A)  Unless authorized by statute, Government purchasers physically located inside the United States are prohibited from using the higher micro-purchase threshold authorized for purchases made and/or with a place of performance outside the United States.
+
+				(B)  The micro-purchase threshold for acquisitions subject to 41 U.S.C. chapter 67, Service Contract Labor Standards, remains at $2,500.
+
+				(C)  The micro-purchase threshold for acquisitions of construction subject to 40 U.S.C. chapter 31, subchapter IV, Wage Rate Requirements (Construction), remains at $2,000.
+
+				(D)  The higher micro-purchase thresholds in paragraph (g)(iii) of this section are not authorized for acquisitions supporting humanitarian or peacekeeping operations.
+
+PGI 212.403  Methods.
+
+	(a)(1)(i)(A)  A Governmentwide commercial purchase card program is authorized pursuant to a delegation of contracting authority and designation as a DoD contracting activity for the purpose of streamlining the purchase and payment processes for supplies and services by use of a Government-issued purchase card. 
+
+			(B)  Governmentwide commercial purchase card programs cannot be established or operated unless contracting authority is granted in accordance with governing laws and regulations, and delegated through a contracting activity identified at PGI 202.101.  Further guidance regarding establishment, operation, and oversight of Governmentwide commercial purchase card programs can be found in the "Department of Defense Government Charge Card Guidebook for Establishing and Managing Purchase, Travel, and Fuel Card Programs" at https://www.acq.osd.mil/asda/dpc/ce/pc/docs-guides.html.
+
+	(a)(2)(ii)(A)  Generally, use unilateral modifications (see far 43.103) for-  
+
+					(1)  No-cost amended shipping instructions if- 
+
+						(i)  The amended shipping instructions modify a unilateral purchase order; and 
+
+						(ii)  The contractor agrees orally or in writing; and  
+
+					(2)  Any change made before work begins if- 
+
+						(i)  The change is within the scope of the original order; 
+
+						(ii)  The contractor agrees; 
+
+						(iii)  The modification references the contractor's oral or written agreement; and 
+
+						(iv)  Block 13d of Standard Form 30, Amendment of Solicitation/Modification of Contract, is annotated to reflect the authority for issuance of the modification.
+
+	(b)(2)(i)(1)  Establish fuel card accounts-
+
+						(i)  For DoD customers, contact the service or agency component program manager for fuel cards (see http://www.desc.dla.mil/dcm/files/cpmpocs06022010.pdf; and
+
+						(ii)  For non-DoD customers, contact the designated account manager identified at http://www.desc.dla.mil/dcm/dcmpage.asp?pageid=41.
+
+					(2)  Purchasers using the air card(r) and sea card(r) must follow the guidance found at http://www.desc.dla.mil/dcm/dcmpage.asp?pageid=28.
+
+	(b)(2)(ii)(2)  Commercial products and commercial services.  If SF 1449 is not used, use DD  Form 1155 in accordance with paragraph (b)(2)(ii)(2)(3) of this section.
+
+					(3)  The DD Form 1155 is authorized for use for-
+
+						(i)  Orders placed in accordance with FAR part 8 and 16; and
+
+						(ii)  Classified acquisitions when the purchase is made within the United States.  Attach the DD Form 254, Contract Security Classification Specification, to the purchase order.
+
+			(iii)  Do not use Optional Form 347, Order for Supplies or Services, or Optional Form 348, Order for Supplies or Services Schedule--Continuation.
+
+			(iv)  Use Standard Form 30, Amendment of Solicitation/Modification of Contract, to-
+
+				(A)  Modify a purchase order; or
+
+				(B)  Cancel a unilateral purchase order.
+
+PGI 212.70-DEFENSE COMMERCIAL SOLUTIONS OPENING
+
+PGI 212.7003  Limitations.
+
+	(a)  Prior to awarding a contract in excess of $100 million pursuant to a commercial solutions opening (CSO), contracting officers must prepare a written determination for approval by the senior procurement executive that includes-
+
+		(1)  A description of the innovative commercial product, commercial service, or technology acquired;
+
+		(2)  A description of the requirement, capability gap, or potential technological advancement with respect to which the innovative commercial product, commercial service, or technology acquired provides a solution or a potential new capability;
+
+		(3)  A description of the efficacy of the effort to meet the mission needs of DoD or the relevant military department or defense agency;
+
+		(4)  The proposed contract award amount; and
+
+		(5)  The prospective contractor.
+
+	(b)  Include a copy of the approved determination in the contract file.
+
+PGI 212.7005  Congressional notification.
+
+Military departments and defense agencies must provide notification to the congressional defense committees no later than 45 days after the award of a contract valued at more than $100 million resulting from a CSO.
+
+	(a)  The contracting officer must prepare a notice of award for the congressional defense committees that includes-
+
+		(1)  A description of the innovative commercial product, commercial service, or technology acquired;
+
+		(2)  A description of the requirement, capability gap, or potential technological advancement with respect to which the innovative commercial product, commercial service, or technology acquired provides a solution or a potential new capability;
+
+		(3)  The contract award amount; and
+
+		(4)  The contractor awarded the contract.
+
+	(b)  Submit the notice of award in accordance with department/agency procedures.
+
+	(c)  Include a copy of the notice of award in the contract file.
+
+PGI 212.72-APPLICABILITY OF CERTAIN LAWS TO THE ACQUISITION OF COMMERCIAL PRODUCTS, COMMERCIAL SERVICES, AND COMMERCIALLY AVAILABLE OFF-THE-SHELF ITEMS
+
+PGI 212.7201  Applicability of certain laws to Executive agency contracts for the acquisition of commercial products and commercial services.
+
+	(a)  The following laws are not applicable to contracts for the acquisition of commercial products or commercial services:
+
+		(i)  10 U.S.C. 3321(b), Prohibition on Contingent Fees.
+
+		(ii)  10 U.S.C. 3741-3750, Allowable Costs Under Defense Contracts.
+
+		(iii)  10 U.S.C. 3845, Contractor Inventory Accounting System Standards (see 252.242-7004).
+
+		(iv)  10 U.S.C. 4651, note prec. (section 855, Pub. L. 117-81), Employment Transparency Regarding Individuals Who Perform Work in the People's Republic of China.
+
+		(v)  10 U.S.C. 4656(a), Prohibition on Persons Convicted of Defense Related Felonies.
+
+		(vi)  10 U.S.C. 4753(b), Requirement to Identify Suppliers.
+
+		(vii)  10 U.S.C. 4864, Miscellaneous Limitations on the Procurement of Goods Other Than United States Goods.  10 U.S.C. 4864 is not applicable to contracts valued at or below the simplified acquisition threshold.
+
+		(viii)  Section 8116 of the Defense Appropriations Act for Fiscal Year 2010 (Pub. L. 111-118) (prohibits mandatory arbitration) and similar sections in subsequent DoD appropriations acts.
+
+		(ix)  Domestic Content Restrictions in the National Defense Appropriations Acts for Fiscal Years 1996 and Subsequent Years, unless the restriction specifically applies to commercial products or commercial services.  For the restriction that specifically applies to commercial ball or roller bearings as end items, see 225.7009-3 (section 8065 of Pub. L. 107-117).
+
+	(c)  The applicability of the following laws has been modified in regard to contracts for the acquisition of commercial products and commercial services:
+
+		(i)  10 U.S.C. 3703, Truthful Cost or Pricing Data (see FAR 15.403-1(c)(3)).
+
+		(ii)  10 U.S.C. 4655, Prohibition on Limiting Subcontractor Direct Sales to the United States (see FAR 3.503 and 52.203-6). 
+
+PGI 212.7202  Applicability of certain laws to subcontracts for the acquisition of commercial products and commercial services.
+
+	(a)  The following laws are not applicable to subcontracts at any tier for the acquisition of commercial products, commercial services, or commercial components:
+
+		(i)  10 U.S.C. 2391 note, Notification of Substantial Impact on Employment.
+
+		(ii)  10 U.S.C. 2631, Transportation of Supplies by Sea (except as provided in the clause at 252.247-7023, Transportation of Supplies by Sea).
+
+		(iii)  10 U.S.C. 3321(b), Prohibition on Contingent Fees.
+
+		(iv)  10 U.S.C. 3741-3750, Allowable Costs Under Defense Contracts.
+
+		(v)  10 U.S.C. 3841(d), Examination of Records of a Contractor.
+
+		(vi)  10 U.S.C. 3845, Contractor Inventory Accounting System Standards.
+
+		(vii)  10 U.S.C. 4651, note prec. (section 855, Pub. L. 117-81), Employment Transparency Regarding Individuals Who Perform Work in the People's Republic of China.
+
+		(viii)  10 U.S.C. 4654, Prohibition Against Doing Business with Certain Offerors or Contractors.
+
+		(ix)  10 U.S.C. 4656(a), Prohibition on Persons Convicted of Defense Related Felonies.
+
+		(x)  10 U.S.C. 4753(b), Requirement to Identify Suppliers.
+
+		(xi)  10 U.S.C. 4801 note prec., Notification of Proposed Program Termination.
+
+		(xii)  10 U.S.C. 4864, Miscellaneous Limitations on the Procurement of Goods Other Than United States Goods.  10 U.S.C. 4864 is not applicable to subcontracts valued at or below the simplified acquisition threshold.
+
+		(xiii)  Section 8116 of the Defense Appropriations Act for Fiscal Year 2010 (Pub. 
+L. 111-118) (prohibits mandatory arbitration) and similar sections in subsequent DoD appropriations acts.
+
+		(xiv)  Domestic Content Restrictions in the National Defense Appropriations 
+Acts for Fiscal Years 1996 and Subsequent Years, unless the restriction specifically applies to commercial products and commercial services.  For the restriction that specifically applies to commercial ball or roller bearings as end items, see 225.7009-3 
+(section 8065, Pub. L. 107-117).
+
+	(b)  Certain requirements of the following laws have been eliminated for subcontracts at any tier for the acquisition of commercial products, commercial services, or commercial components:
+
+		(i)  10 U.S.C. 4654(d), Subcontractor Reports Under Prohibition Against Doing Business with Certain Offerors (see FAR 52.209-6).
+
+		(ii)  10 U.S.C. 4655, Prohibition on Limiting Subcontractor Direct Sales to the United States (see FAR 3.503 and 52.203-6). 
+
+		(iii)  10 U.S.C. 4864, Miscellaneous Limitations on the Procurement of Goods Other Than United States Goods.  10 U.S.C. 4864 is not applicable to subcontracts at any tier valued at or below the simplified acquisition threshold.
+
+PGI 212.7203  Applicability of certain laws to contracts for the acquisition of COTS items.  Commercially available off-the-shelf (COTS) items are a subset of commercial products.  
+
+Therefore, any laws listed at https://www.acquisition.gov/inapplicable laws, PGI 212.7201, or 212.7202 are also not applicable or are modified in their applicability to contracts for the acquisition of COTS items.  In addition to the laws listed at https://www.acquisition.gov/inapplicable laws as specifically not applicable to COTS items, the following laws are not applicable to contracts for the acquisition of COTS items:
+
+	(1)  10 U.S.C. 391, Reporting on Cyber Incidents with Respect to Networks and Information Systems of Operationally Critical Contractors and Certain Other Contractors, and 10 U.S.C. 393, Reporting on Penetrations of Networks and Information Systems of Certain Contractors.
+
+	(2)  Paragraph (a)(1) of 10 U.S.C. 4863, Requirement to buy strategic materials critical to national security from American sources, except as provided at 225.7003-3(b)(2)(i).
+
+	(3)  Paragraph (a)(1) of 10 U.S.C. 4872, Prohibition on acquisition of sensitive materials from non-allied foreign nations, except as provided at 225.7018-3(c)(1).
+Attachment A2
+DARS Tracking Number: 2026-O0028
+Revolutionary Federal Acquisition Regulation (FAR) Overhaul Part 12
+Defense FAR Supplement (DFARS) Part 212
+
+
+
+Page 5 of 7
+
