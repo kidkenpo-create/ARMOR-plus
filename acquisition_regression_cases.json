@@ -1,0 +1,183 @@
+[
+  {
+    "id": "motor_vehicle_lease_certification_naples",
+    "question": "You are a contracting officer stationed in Naples, Italy. You have received a request to lease motor vehicles from a requiring activity at your duty station. The motor vehicles will be leased for a period of 60 days. Are you required to obtain a written certification from the requiring activity regarding the fuel efficiency and size of the vehicles requested before you can prepare the solicitation?",
+    "expected": {
+      "answer": "No",
+      "issue_family": "motor_vehicle_lease_certification",
+      "classroom_reference": "FAR 8.1100",
+      "scope_gate": "FAR 8.1100",
+      "reject_as_controlling": ["DFARS 207.401"]
+    }
+  },
+  {
+    "id": "buy_american_supplies_oregon_15000",
+    "question": "A contracting officer has a requirement for supplies for public use in Oregon valued at $15,000. None of the exceptions at FAR 25.103 and DFARS 225.103 apply. Is the contracting officer required to acquire only domestic end products?",
+    "expected": {
+      "answer": "No",
+      "issue_family": "buy_american_supplies_threshold",
+      "classroom_reference": "FAR 25.100(b)(1)",
+      "reject_as_controlling": ["FAR 25.102", "FAR 25.003"]
+    }
+  },
+  {
+    "id": "multiyear_cancellation_ceiling_20m",
+    "question": "You are a member of an acquisition team contemplating the award of a multiyear contract with a cancellation ceiling of $20 million. Based on the scenario above, would congressional notification be required before award of the contract?",
+    "expected": {
+      "answer": "No",
+      "issue_family": "multiyear_congressional_notification",
+      "classroom_reference": "FAR 17.108(b) or DFARS 217.170(d)(1)(iv)",
+      "current_reference": "DFARS RFO 217.104-370(b)(1)(iv)"
+    }
+  },
+  {
+    "id": "threshold_micro_purchase_15000",
+    "question": "Does a $15,000 acquisition exceed the micro-purchase threshold?",
+    "expected": {
+      "question_type": "threshold",
+      "threshold_result": false,
+      "requires_conventions_check": true
+    }
+  },
+  {
+    "id": "far_27_400_dod_exception",
+    "question": "For a DoD acquisition, does the FAR Part 27 rule apply without checking the DoD exception?",
+    "expected": {
+      "requires_dfars_check": true,
+      "requires_deviation_check": true,
+      "must_check_scope_exception": true
+    }
+  },
+  {
+    "id": "dfars_252_225_7040_deviation",
+    "question": "Does DFARS 252.225-7040 control if an active class deviation says use an attached replacement clause in lieu of it?",
+    "expected": {
+      "question_type": "deviation",
+      "controlling_source_family": "class_deviation"
+    }
+  },
+  {
+    "id": "dfars_232_803_b_controls",
+    "question": "For DoD assignment of claims, is DFARS 232.803(b) controlling?",
+    "expected": {
+      "requires_dfars_check": true,
+      "must_not_omit_final_determination": true
+    }
+  },
+  {
+    "id": "far_19_302_2_rfo_equivalent",
+    "question": "What is the RFO rule corresponding to legacy FAR 19.302-2(a)(1)(ii)(A)?",
+    "expected": {
+      "must_not_use_legacy_when_rfo_exists": true,
+      "requires_meaning_based_mapping": true
+    }
+  },
+  {
+    "id": "construction_estimate_handling",
+    "question": "You are the contracting officer for an unclassified construction contract to be performed in Nebraska. Which statement is true regarding how the Government estimate of construction costs will be handled?",
+    "expected": {
+      "answer": "The Government estimate will be designated as For Official Use Only.",
+      "issue_family": "construction_estimate_handling",
+      "classroom_reference": "DFARS PGI 236.203(1)"
+    }
+  },
+  {
+    "id": "hca_delegation_variable_unit_prices",
+    "question": "FAR 17.106-3(g) authorizes the HCA to approve variable unit prices when using multiyear contract procedures. Can the HCA authority be delegated to the chief of the contracting office?",
+    "expected": {
+      "answer": "Yes",
+      "issue_family": "delegation_of_authority",
+      "classroom_reference": "FAR 1.108(b)"
+    }
+  },
+  {
+    "id": "commercial_product_written_determination",
+    "question": "You are contemplating FAR part 12 procedures for a supply procurement valued at $800,000. This is the first time the item has been purchased by DoD, you will not solicit from nontraditional defense contractors, and it will not be made under FAR 12.102(f)(1). Is a written commercial product determination required?",
+    "expected": {
+      "answer": "True",
+      "issue_family": "commercial_product_written_determination",
+      "classroom_reference": "DFARS 212.102(a)(i)(A) or DFARS 212.102(a)(iii)(A)"
+    }
+  },
+  {
+    "id": "enemy_prisoner_interrogation",
+    "question": "Can an enemy prisoner of war be interrogated by contractor personnel?",
+    "expected": {
+      "answer": "Generally prohibited, but Secretary of Defense may waive for 60 days.",
+      "issue_family": "detainee_interrogation_contractor_personnel",
+      "classroom_reference": "DFARS 237.173-4"
+    }
+  },
+  {
+    "id": "technical_data_clause_dod_exception",
+    "question": "A contract specialist is preparing a competitive solicitation for supplies. Technical data will be acquired under the contract. None of the exceptions at FAR 27.409(b)(1) apply. Is FAR 52.227-14 required?",
+    "expected": {
+      "issue_family": "technical_data_clause_dod_exception",
+      "classroom_reference": "FAR 27.400 or DFARS 227.400",
+      "reject_as_controlling": ["FAR 27.409(b)(1)"]
+    }
+  },
+  {
+    "id": "uca_initial_spares",
+    "question": "A contracting officer is issuing a UCA for initial spares. Is there a limit on the amount that can be obligated before definitization?",
+    "expected": {
+      "answer": "No",
+      "issue_family": "uca_initial_spares_obligation_limit",
+      "classroom_reference": "DFARS 217.7404-5(a)"
+    }
+  },
+  {
+    "id": "warranty_construction_germany",
+    "question": "Should FAR 52.246-21, Warranty of Construction, be used in a fixed-price construction contract performed in Germany?",
+    "expected": {
+      "answer": "No",
+      "issue_family": "warranty_construction_germany",
+      "classroom_reference": "DFARS 246.710(2)"
+    }
+  },
+  {
+    "id": "qatar_252_225_7040_class_deviation",
+    "question": "Maintenance contract in Qatar, USCENTCOM AOR, value $8,500,000, supporting a contingency operation. Must DFARS 252.225-7040 be included?",
+    "expected": {
+      "answer": "Yes",
+      "issue_family": "contingency_contractor_personnel_clause_deviation",
+      "classroom_reference": "CD 2017-O0004"
+    }
+  },
+  {
+    "id": "military_flight_simulator_waiver",
+    "question": "Can a DoD activity enter into a service contract for a military flight simulator without a Secretary of Defense waiver?",
+    "expected": {
+      "answer": "No",
+      "issue_family": "military_flight_simulator_waiver",
+      "classroom_reference": "DFARS 237.102-71(b)"
+    }
+  },
+  {
+    "id": "subcontractor_sdb_representation",
+    "question": "Can a prime contractor accept a subcontractor's written representations of its size as a small disadvantaged business if current, accurate, and complete?",
+    "expected": {
+      "answer": "Yes",
+      "issue_family": "subcontractor_sdb_representation",
+      "classroom_reference": "FAR 19.703(a)(2)(i)"
+    }
+  },
+  {
+    "id": "assignment_of_claims_nonpersonal_services",
+    "question": "Which is correct regarding assignment of claims for a nonpersonal services contract?",
+    "expected": {
+      "answer": "Assignment may be prohibited if determined in the Government's interest.",
+      "issue_family": "assignment_of_claims_nonpersonal_services",
+      "classroom_reference": "DFARS 232.803(b)"
+    }
+  },
+  {
+    "id": "abilityone_responsibility",
+    "question": "A contracting officer is making an award to an AbilityOne participating nonprofit agency. Is an affirmative responsibility determination required?",
+    "expected": {
+      "answer": "No",
+      "issue_family": "abilityone_responsibility_determination",
+      "classroom_reference": "FAR 9.102(b)(3)"
+    }
+  }
+]
