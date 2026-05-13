@@ -39,7 +39,7 @@ def route_sources(classification: Classification, issue_profile: IssueProfile | 
             requests.append(
                 SourceRequest(
                     "class_deviation",
-                    "Class deviations can displace FAR/DFARS text.",
+                    "Class deviations can displace RFO FAR/DFARS text.",
                     part=_to_dfars_part(part),
                     required=True,
                 )
