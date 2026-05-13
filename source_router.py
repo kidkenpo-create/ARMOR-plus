@@ -19,7 +19,7 @@ def route_sources(classification: Classification, issue_profile: IssueProfile | 
                 SourceRequest("rfo_far", "RFO FAR must be checked for the base rule.", part=part)
             )
             requests.append(
-                SourceRequest("rfo_far_saad", "SAAD must be checked for the same FAR part.", part=part)
+                SourceRequest("rfo_far_saad", "SAAD must be checked for the same RFO FAR part.", part=part)
             )
 
         if classification.is_dod or part in DFARS_PARTS:
