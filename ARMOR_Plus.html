@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARMOR Plus — DoD Acquisition Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@300;400;500&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:    #08111e;
+  --navy2:   #0d1c30;
+  --navy3:   #122540;
+  --navy4:   #1a3255;
+  --gold:    #b8913a;
+  --gold2:   #d4a84e;
+  --gold3:   #e8c87a;
+  --gold-g:  rgba(184,145,58,0.12);
+  --gold-b:  rgba(184,145,58,0.25);
+  --green:   #1db87a;
+  --green-g: rgba(29,184,122,0.1);
+  --green-b: rgba(29,184,122,0.25);
+  --amber:   #d4890a;
+  --amber-g: rgba(212,137,10,0.1);
+  --amber-b: rgba(212,137,10,0.25);
+  --red:     #c94040;
+  --red-g:   rgba(201,64,64,0.1);
+  --red-b:   rgba(201,64,64,0.25);
+  --slate:   #7a9ab8;
+  --slate2:  #4d6e8a;
+  --slate3:  #2d4a62;
+  --white:   #eef2f7;
+  --white2:  #c8d4e0;
+  --rule:    rgba(120,160,200,0.1);
+  --mono:    'JetBrains Mono', monospace;
+  --sans:    'Barlow', sans-serif;
+  --cond:    'Barlow Condensed', sans-serif;
+  --serif:   'Crimson Pro', serif;
+}
+
+html, body {
+  min-height: 100vh;
+  background: var(--navy);
+  color: var(--white2);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* subtle grid overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(120,160,200,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120,160,200,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(8,17,30,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: stretch; height: 60px;
+}
+
+.topbar-brand {
+  display: flex; align-items: center; gap: 16px;
+  padding: 0 28px;
+  border-right: 1px solid var(--rule);
+}
+
+.brand-emblem {
+  position: relative;
+  width: 38px; height: 38px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.brand-emblem::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(184,145,58,0.3);
+  border-radius: 50%;
+}
+.brand-emblem span {
+  font-family: var(--mono);
+  font-size: 9px; font-weight: 500;
+  color: var(--gold); letter-spacing: 1px;
+  position: relative; z-index: 1;
+}
+
+.brand-text {}
+.brand-name {
+  font-family: var(--cond);
+  font-size: 17px; font-weight: 700;
+  color: var(--white); letter-spacing: 1px;
+  text-transform: uppercase; line-height: 1.2;
+}
+.brand-sub {
+  font-family: var(--mono);
+  font-size: 9px; font-weight: 300;
+  color: var(--slate); letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.topbar-right {
+  display: flex; align-items: center; gap: 20px;
+  padding: 0 28px; margin-left: auto;
+}
+
+.status-pill {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--green-g);
+  border: 1px solid var(--green-b);
+  padding: 4px 12px; border-radius: 2px;
+}
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+.status-text {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  color: var(--green); letter-spacing: 2px; text-transform: uppercase;
+}
+
+.version-tag {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--gold); letter-spacing: 2px;
+  border: 1px solid var(--gold-b);
+  padding: 3px 10px; background: var(--gold-g);
+}
+
+/* ── LAYOUT ── */
+.shell {
+  position: relative; z-index: 1;
+  max-width: 900px; width: 100%;
+  margin: 0 auto; padding: 32px 24px 80px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+/* ── CONFIG PANEL ── */
+.config-panel {
+  background: var(--navy2);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--gold);
+  padding: 16px 20px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+
+.field-label {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  color: var(--slate); letter-spacing: 2px; text-transform: uppercase;
+  white-space: nowrap; flex-shrink: 0;
+}
+
+.key-input {
+  flex: 1; min-width: 200px;
+  background: var(--navy);
+  border: 1px solid var(--slate3);
+  color: var(--white2);
+  font-family: var(--mono); font-size: 12px;
+  padding: 9px 14px; outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.key-input:focus {
+  border-color: var(--gold2);
+  box-shadow: 0 0 0 3px var(--gold-g);
+}
+.key-input::placeholder { color: var(--slate3); }
+
+.config-note {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--slate3); letter-spacing: 1px; text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── QUERY PANEL ── */
+.query-panel {
+  background: var(--navy2);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+
+.query-header {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.query-label {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  color: var(--slate); letter-spacing: 2px; text-transform: uppercase;
+}
+
+.query-hint {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--slate3); letter-spacing: 1px;
+}
+
+.query-body {
+  display: flex; gap: 0; align-items: stretch;
+}
+
+.query-textarea {
+  flex: 1;
+  background: transparent; border: none; outline: none; resize: none;
+  color: var(--white);
+  font-family: var(--serif); font-size: 16px; font-weight: 300;
+  line-height: 1.7; padding: 18px 20px;
+  min-height: 80px; max-height: 160px;
+}
+.query-textarea::placeholder { color: var(--slate3); font-style: italic; }
+
+.analyze-btn {
+  background: var(--gold);
+  color: var(--navy);
+  border: none; cursor: pointer;
+  font-family: var(--cond); font-size: 13px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 0 28px; min-width: 120px;
+  border-left: 1px solid rgba(0,0,0,0.2);
+  transition: background 0.15s, transform 0.1s;
+  flex-shrink: 0;
+}
+.analyze-btn:hover { background: var(--gold2); }
+.analyze-btn:active { transform: scale(0.98); }
+.analyze-btn:disabled { background: var(--slate3); cursor: not-allowed; color: var(--navy3); }
+
+/* ── ERROR ── */
+.error-panel {
+  background: var(--red-g); border: 1px solid var(--red-b);
+  border-left: 3px solid var(--red);
+  padding: 14px 18px;
+  font-family: var(--mono); font-size: 11px; color: var(--red);
+  display: flex; gap: 10px; align-items: flex-start;
+}
+
+/* ── STREAMING ── */
+.stream-panel {
+  background: var(--navy2); border: 1px solid var(--rule);
+  overflow: hidden; animation: fadeUp 0.3s ease;
+}
+.stream-header {
+  padding: 10px 18px; border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 12px;
+}
+.stream-label {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  color: var(--slate); letter-spacing: 2px; text-transform: uppercase;
+}
+.thinking-dots { display: flex; gap: 4px; align-items: center; }
+.thinking-dots span {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--gold2);
+  animation: think 1.4s ease infinite;
+}
+.thinking-dots span:nth-child(2) { animation-delay: 0.15s; }
+.thinking-dots span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes think { 0%,80%,100%{opacity:0.3;transform:scale(0.6)} 40%{opacity:1;transform:scale(1)} }
+
+.stream-body {
+  padding: 16px 20px;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--slate); line-height: 1.9;
+  white-space: pre-wrap; word-break: break-word;
+  max-height: 320px; overflow-y: auto;
+}
+.stream-cursor {
+  display: inline-block; width: 8px; height: 14px;
+  background: var(--gold2); vertical-align: text-bottom;
+  margin-left: 2px; animation: blink 0.8s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ── RESULTS ── */
+.results { display: flex; flex-direction: column; animation: fadeUp 0.3s ease; }
+
+/* BLUF */
+.bluf-panel {
+  background: var(--navy2); border: 1px solid var(--rule);
+  border-top: 3px solid var(--green);
+  padding: 22px 26px;
+}
+.bluf-panel.conditional { border-top-color: var(--amber); }
+.bluf-panel.non-definitive { border-top-color: var(--red); }
+
+.bluf-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+
+.bluf-badge {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 3px 10px;
+  background: var(--green-g); color: var(--green);
+  border: 1px solid var(--green-b);
+}
+.bluf-badge.conditional { background: var(--amber-g); color: var(--amber); border-color: var(--amber-b); }
+.bluf-badge.non-definitive { background: var(--red-g); color: var(--red); border-color: var(--red-b); }
+
+.bluf-determination {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--green);
+}
+.bluf-determination.conditional { color: var(--amber); }
+.bluf-determination.non-definitive { color: var(--red); }
+
+.bluf-text {
+  font-family: var(--serif); font-size: 17px; font-weight: 400;
+  color: var(--white); line-height: 1.65; margin-bottom: 12px;
+}
+
+.bluf-cite {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 11px; color: var(--gold2);
+}
+.bluf-cite-line {
+  width: 24px; height: 1px; background: var(--gold); opacity: 0.5;
+  flex-shrink: 0;
+}
+
+/* STEPS */
+.steps-container { border: 1px solid var(--rule); border-top: none; }
+
+.step-item { border-top: 1px solid var(--rule); }
+
+.step-toggle {
+  width: 100%; background: var(--navy2); border: none;
+  cursor: pointer; display: flex; align-items: stretch; padding: 0;
+  text-align: left; transition: background 0.15s;
+}
+.step-toggle:hover { background: var(--navy3); }
+
+.step-num-cell {
+  padding: 13px 18px; min-width: 96px;
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  color: var(--gold2); letter-spacing: 1.5px; text-transform: uppercase;
+  border-right: 1px solid var(--rule); flex-shrink: 0;
+  display: flex; align-items: center;
+}
+
+.step-title-cell {
+  flex: 1; padding: 13px 18px;
+  font-family: var(--cond); font-size: 13px; font-weight: 600;
+  color: var(--white2); letter-spacing: 1px; text-transform: uppercase;
+  display: flex; align-items: center;
+}
+
+.step-arrow {
+  padding: 13px 18px; flex-shrink: 0;
+  font-size: 10px; color: var(--slate3);
+  transition: transform 0.2s; display: flex; align-items: center;
+}
+.step-arrow.open { transform: rotate(90deg); }
+
+.step-content {
+  background: var(--navy);
+  border-top: 1px solid var(--rule);
+  padding: 18px 22px;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--slate); line-height: 1.9;
+  white-space: pre-wrap; word-break: break-word;
+}
+
+/* RUNGS */
+.rung-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 7px; }
+.rung-badge {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 1px; padding: 2px 7px;
+  flex-shrink: 0; margin-top: 3px;
+}
+.rb-r { background: var(--green-g); color: var(--green); border: 1px solid var(--green-b); }
+.rb-u { background: var(--red-g); color: var(--red); border: 1px solid var(--red-b); }
+.rb-n { background: rgba(77,110,138,0.1); color: var(--slate2); border: 1px solid rgba(77,110,138,0.2); }
+.rb-s { background: var(--amber-g); color: var(--amber); border: 1px solid var(--amber-b); }
+.rung-text { font-family: var(--mono); font-size: 11px; color: var(--slate); line-height: 1.8; flex: 1; }
+
+/* SV */
+.sv-section { margin-top: 8px; }
+.sv-label-row {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  color: var(--slate2); letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.sv-checks { display: flex; flex-direction: column; gap: 6px; }
+.sv-row { display: flex; align-items: center; gap: 10px; }
+.sv-badge {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 1px; padding: 2px 8px; flex-shrink: 0;
+}
+.sv-y { background: var(--green-g); color: var(--green); border: 1px solid var(--green-b); }
+.sv-n { background: var(--red-g); color: var(--red); border: 1px solid var(--red-b); }
+.sv-desc { font-family: var(--mono); font-size: 11px; color: var(--slate); }
+
+/* RAW FALLBACK */
+.raw-panel {
+  background: var(--navy2); border: 1px solid var(--rule);
+  padding: 20px 24px;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--slate); line-height: 1.9;
+  white-space: pre-wrap; word-break: break-word;
+}
+
+/* FOOTER */
+.result-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; background: var(--navy2);
+  border: 1px solid var(--rule); border-top: none;
+}
+.result-time { font-family: var(--mono); font-size: 10px; color: var(--slate3); letter-spacing: 1px; }
+.copy-btn {
+  background: transparent; border: 1px solid var(--slate3);
+  color: var(--slate); font-family: var(--mono); font-size: 10px;
+  font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 7px 18px; cursor: pointer; transition: all 0.15s;
+}
+.copy-btn:hover { border-color: var(--gold2); color: var(--gold2); }
+.copy-btn.copied { border-color: var(--green); color: var(--green); }
+
+/* EMPTY STATE */
+.empty-state {
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  padding: 80px 24px; gap: 18px;
+}
+.empty-emblem {
+  width: 72px; height: 72px;
+  border: 1px solid var(--slate3); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; opacity: 0.5;
+}
+.empty-emblem::before {
+  content: '';
+  position: absolute; inset: 6px;
+  border: 1px solid var(--slate3); border-radius: 50%;
+}
+.empty-emblem span {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--slate3); letter-spacing: 1px;
+  position: relative; z-index: 1;
+}
+.empty-title {
+  font-family: var(--serif); font-size: 22px; font-weight: 300;
+  color: var(--white2); letter-spacing: 0.5px;
+}
+.empty-body {
+  font-size: 13px; color: var(--slate);
+  line-height: 1.75; max-width: 440px; font-weight: 300;
+}
+.empty-tags { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.empty-tag {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 5px 12px;
+  background: var(--gold-g); color: var(--gold);
+  border: 1px solid var(--gold-b);
+}
+
+/* DIVIDER */
+.section-divider {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  color: var(--slate3); letter-spacing: 3px; text-transform: uppercase;
+}
+.section-divider::before, .section-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--rule);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="brand-emblem"><span>DoD</span></div>
+    <div class="brand-text">
+      <div class="brand-name">ARMOR Plus</div>
+      <div class="brand-sub">Acquisition Regulatory Analysis</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="status-pill">
+      <div class="status-dot"></div>
+      <span class="status-text">Live</span>
+    </div>
+    <div class="version-tag">v3.1</div>
+  </div>
+</div>
+
+<div class="shell">
+
+  <!-- CORS NOTICE — shown only when opened via file:// -->
+  <div id="corsNotice" style="display:none;background:rgba(212,137,10,0.1);border:1px solid rgba(212,137,10,0.3);border-left:3px solid var(--amber);padding:14px 18px;font-family:var(--mono);font-size:11px;color:var(--amber);line-height:1.8;">
+    <strong style="letter-spacing:1px;">⚠ LOCAL FILE DETECTED</strong><br>
+    Browser security blocks API calls from <code>file://</code> URLs.<br>
+    Run a local server instead:<br><br>
+    <code style="background:rgba(0,0,0,0.3);padding:6px 12px;display:inline-block;margin-top:4px;">python3 -m http.server 8080</code><br><br>
+    Then open: <code>http://localhost:8080/ARMOR_Plus.html</code>
+  </div>
+
+  <!-- API KEY -->
+  <div class="config-panel">
+    <span class="field-label">OpenAI API Key</span>
+    <input class="key-input" type="password" id="apiKey" placeholder="sk-..." autocomplete="off" />
+    <span class="config-note" id="keyStatus">Session only &middot; Not stored</span>
+    <button onclick="clearKey()" style="background:transparent;border:1px solid var(--slate3);color:var(--slate2);font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;cursor:pointer;flex-shrink:0;">Clear</button>
+  </div>
+
+  <!-- QUERY -->
+  <div class="query-panel">
+    <div class="query-header">
+      <span class="query-label">Acquisition Question</span>
+      <span class="query-hint">Ctrl + Enter to analyze</span>
+    </div>
+    <div class="query-body">
+      <textarea class="query-textarea" id="question"
+        placeholder="Enter your DoD acquisition question…"
+        rows="3"></textarea>
+      <button class="analyze-btn" id="analyzeBtn" onclick="runAnalysis()">Analyze</button>
+    </div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="error-panel" id="errorPanel" style="display:none">
+    <span>⚠</span>
+    <span id="errorText"></span>
+  </div>
+
+  <!-- STREAM -->
+  <div class="stream-panel" id="streamPanel" style="display:none">
+    <div class="stream-header">
+      <span class="stream-label">Reasoning</span>
+      <div class="thinking-dots"><span></span><span></span><span></span></div>
+    </div>
+    <div class="stream-body" id="streamBody"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="resultsPanel" style="display:none">
+    <div id="blufCard"></div>
+    <div class="steps-container" id="stepsContainer"></div>
+    <div class="result-footer">
+      <span class="result-time" id="resultTime"></span>
+      <button class="copy-btn" id="copyBtn" onclick="copyOutput()">Copy Output</button>
+    </div>
+  </div>
+
+  <!-- RAW FALLBACK -->
+  <div class="raw-panel" id="rawPanel" style="display:none"></div>
+
+  <!-- EMPTY -->
+  <div class="empty-state" id="emptyState">
+    <div class="empty-emblem"><span>ARMOR</span></div>
+    <div class="empty-title">DoD Acquisition Analysis</div>
+    <div class="empty-body">
+      Enter your acquisition question above. ARMOR runs the full STEP methodology —
+      Two-Pass Gate, 8 Rungs, Verification Loop — and returns a CAC-defensible regulatory citation.
+    </div>
+    <div class="empty-tags">
+      <span class="empty-tag">RFO FAR</span>
+      <span class="empty-tag">DFARS RFO</span>
+      <span class="empty-tag">Class Deviations</span>
+      <span class="empty-tag">8-Rung Analysis</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const GPT_ID = 'g-69d58262b30c819182a2e24051ed3e77';
+
+// ── DETECT file:// PROTOCOL ───────────────────────────────
+if (window.location.protocol === 'file:') {
+  window.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('corsNotice').style.display = 'block';
+  });
+}
+let rawOutput = '';
+let startTime = 0;
+
+// ── KEY PERSISTENCE ───────────────────────────────────────
+window.addEventListener('DOMContentLoaded', function() {
+  const saved = sessionStorage.getItem('armor_key');
+  if (saved) {
+    document.getElementById('apiKey').value = saved;
+    setKeyStatus('loaded');
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('apiKey').addEventListener('input', function() {
+    const val = this.value.trim();
+    if (val.startsWith('sk-') && val.length > 20) {
+      sessionStorage.setItem('armor_key', val);
+      setKeyStatus('saved');
+    } else {
+      sessionStorage.removeItem('armor_key');
+      setKeyStatus('default');
+    }
+  });
+});
+
+function setKeyStatus(state) {
+  const el = document.getElementById('keyStatus');
+  if (state === 'saved' || state === 'loaded') {
+    el.textContent = state === 'loaded' ? 'Key loaded from session' : 'Saved for session';
+    el.style.color = 'var(--green)';
+  } else {
+    el.textContent = 'Session only · Not stored';
+    el.style.color = 'var(--slate3)';
+  }
+}
+
+function clearKey() {
+  sessionStorage.removeItem('armor_key');
+  document.getElementById('apiKey').value = '';
+  setKeyStatus('default');
+}
+
+// ── AUTO-RESIZE TEXTAREA ──────────────────────────────────
+document.getElementById('question').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 160) + 'px';
+});
+
+document.getElementById('question').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) runAnalysis();
+});
+
+// ── PARSE OUTPUT ──────────────────────────────────────────
+function parseOutput(raw) {
+  const text = raw.replace(/\*\*/g, '');
+  const result = { bluf: null, steps: [] };
+
+  // BLUF
+  const blufPatterns = [
+    /0\)\s*BLUF\s*[-–—]+\s*([\s\S]*?)(?=\nSTEP\s+1\s*[-–—])/i,
+    /BLUF\s*[-–—]+\s*([\s\S]*?)(?=\nSTEP\s+1\s*[-–—])/i,
+  ];
+  for (const p of blufPatterns) {
+    const m = text.match(p);
+    if (m) { result.bluf = m[1].trim(); break; }
+  }
+
+  // STEPS
+  const re = /\nSTEP\s+(\d+[AB]?)\s*[-–—]+\s*([^\n]+)\n([\s\S]*?)(?=\nSTEP\s+\d+[AB]?\s*[-–—]|$)/gi;
+  let m;
+  while ((m = re.exec('\n' + text)) !== null) {
+    const c = m[3].trim();
+    if (c) result.steps.push({ num: m[1], title: m[2].trim(), content: c });
+  }
+  return result;
+}
+
+// ── RUNG TAG ──────────────────────────────────────────────
+function getRungTag(line) {
+  if (/--\s*\[?R\]?\s*:|--\s*R\s*:/.test(line) && !/UTR/.test(line)) return 'r';
+  if (/--\s*\[?UTR\]?\s*:|\bUTR\b/.test(line)) return 'u';
+  if (/--\s*\[?N\/T\]?\s*:|\bN\/T\b/.test(line)) return 'n';
+  if (/Checked\/Silent|\bSilent\b/.test(line)) return 's';
+  return null;
+}
+
+// ── RENDER RUNGS ─────────────────────────────────────────
+function renderRungs(content) {
+  const labels = { r: 'REVIEWED', u: 'UTR', n: 'N/T', s: 'SILENT' };
+  return content.split('\n').map(line => {
+    if (!line.trim()) return '<div style="height:5px"></div>';
+    const tag = getRungTag(line);
+    if (!tag) return `<div style="margin-bottom:4px;font-size:11px;color:var(--slate);line-height:1.8">${escHtml(line)}</div>`;
+    const clean = line
+      .replace(/--\s*\[?(REVIEWED|R|UTR|N\/T|Checked\/Silent|Silent)\]?:?\s*/i, '')
+      .replace(/^\d+\.\s*/, '').trim();
+    return `<div class="rung-row"><span class="rung-badge rb-${tag}">${labels[tag]}</span><span class="rung-text">${escHtml(clean)}</span></div>`;
+  }).join('');
+}
+
+// ── RENDER SELF-VERIFICATION ──────────────────────────────
+function renderSV(content) {
+  const defs = [
+    { re: /\(1\)\s*\[?(Y|N)\]?/i, label: 'Operative sentence supports BLUF' },
+    { re: /\(2\)\s*\[?(Y|N)\]?/i, label: 'Regulatory verb confirmed' },
+    { re: /\(3\)\s*\[?(Y|N)\]?/i, label: 'Fact pattern match confirmed' },
+  ];
+  const found = defs.map(d => {
+    const m = content.match(d.re);
+    return m ? { label: d.label, v: m[1].toUpperCase() } : null;
+  }).filter(Boolean);
+
+  if (!found.length) return `<div style="font-size:11px;color:var(--slate)">${escHtml(content)}</div>`;
+
+  return `
+    <div class="sv-section">
+      <div class="sv-label-row">Self-Verification</div>
+      <div class="sv-checks">
+        ${found.map(f => `
+          <div class="sv-row">
+            <span class="sv-badge ${f.v === 'Y' ? 'sv-y' : 'sv-n'}">${f.v}</span>
+            <span class="sv-desc">${escHtml(f.label)}</span>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+// ── RENDER STEP CONTENT ───────────────────────────────────
+function renderStepContent(num, content) {
+  if (num === '3B') return renderRungs(content);
+  if (/self-verification/i.test(content)) {
+    const idx = content.search(/self-verification/i);
+    const pre = content.slice(0, idx).trim();
+    const sv = content.slice(idx).replace(/self-verification:?\s*/i, '').trim();
+    return `${pre ? `<div style="margin-bottom:14px;white-space:pre-wrap">${escHtml(pre)}</div>` : ''}${renderSV(sv)}`;
+  }
+  return escHtml(content);
+}
+
+// ── RENDER BLUF ───────────────────────────────────────────
+function renderBluf(content) {
+  const l = content.toLowerCase();
+  const type = l.includes('non-definitive') ? 'non-definitive' : l.includes('conditional') ? 'conditional' : '';
+  const label = l.includes('non-definitive') ? 'NON-DEFINITIVE' : l.includes('conditional') ? 'CONDITIONAL' : 'DEFINITIVE';
+  const cite = (content.match(/((?:RFO\s+FAR|DFARS\s+RFO)\s+[\d.()a-z-]+)/i) || [])[1] || '';
+  const clean = content.replace(/^(Definitive|Conditional|Non-Definitive)[.:]\s*/i, '').trim();
+
+  return `
+    <div class="bluf-panel ${type}">
+      <div class="bluf-header">
+        <span class="bluf-badge ${type}">BLUF</span>
+        <span class="bluf-determination ${type}">${label}</span>
+      </div>
+      <div class="bluf-text">${escHtml(clean)}</div>
+      ${cite ? `<div class="bluf-cite"><div class="bluf-cite-line"></div>${escHtml(cite)}</div>` : ''}
+    </div>`;
+}
+
+// ── RENDER STEPS ──────────────────────────────────────────
+function renderSteps(steps) {
+  const defaultOpen = ['3B', '5', '6', '7'];
+  return steps.map((s, i) => {
+    const open = defaultOpen.includes(s.num);
+    const id = `step-${i}`;
+    return `
+      <div class="step-item">
+        <button class="step-toggle" onclick="toggleStep('${id}')">
+          <span class="step-num-cell">Step ${escHtml(s.num)}</span>
+          <span class="step-title-cell">${escHtml(s.title)}</span>
+          <span class="step-arrow ${open ? 'open' : ''}" id="${id}-arrow">▶</span>
+        </button>
+        <div class="step-content" id="${id}-content" style="${open ? '' : 'display:none'}">
+          ${renderStepContent(s.num, s.content)}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleStep(id) {
+  const content = document.getElementById(id + '-content');
+  const arrow = document.getElementById(id + '-arrow');
+  const isOpen = content.style.display !== 'none';
+  content.style.display = isOpen ? 'none' : 'block';
+  arrow.classList.toggle('open', !isOpen);
+}
+
+// ── UTILITY ───────────────────────────────────────────────
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function showError(msg) {
+  document.getElementById('errorPanel').style.display = 'flex';
+  document.getElementById('errorText').textContent = msg;
+}
+
+function hideAll() {
+  ['errorPanel','streamPanel','resultsPanel','rawPanel','emptyState'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+}
+
+function copyOutput() {
+  navigator.clipboard.writeText(rawOutput).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Output'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ── MAIN ANALYSIS ─────────────────────────────────────────
+async function runAnalysis() {
+  const key = document.getElementById('apiKey').value.trim();
+  const question = document.getElementById('question').value.trim();
+
+  if (!key) { hideAll(); showError('OpenAI API key required.'); return; }
+  if (!question) { hideAll(); showError('Enter a question.'); return; }
+
+  hideAll();
+  rawOutput = '';
+  startTime = Date.now();
+
+  const btn = document.getElementById('analyzeBtn');
+  btn.disabled = true;
+  btn.textContent = 'Analyzing…';
+
+  // Show stream panel
+  document.getElementById('streamPanel').style.display = 'block';
+  const streamBody = document.getElementById('streamBody');
+  streamBody.innerHTML = '';
+
+  try {
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${key}`,
+        'OpenAI-Beta': 'assistants=v2',
+      },
+      body: JSON.stringify({
+        model: GPT_ID,
+        stream: true,
+        messages: [{ role: 'user', content: question }],
+      }),
+    });
+
+    if (!res.ok) {
+      const e = await res.json().catch(() => ({}));
+      throw new Error(e.error?.message || `API error ${res.status}`);
+    }
+
+    const reader = res.body.getReader();
+    const dec = new TextDecoder();
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const chunk = dec.decode(value);
+      for (const line of chunk.split('\n')) {
+        if (!line.startsWith('data: ')) continue;
+        const data = line.slice(6).trim();
+        if (!data || data === '[DONE]') continue;
+        try {
+          const j = JSON.parse(data);
+          const delta = j.choices?.[0]?.delta?.content || '';
+          if (delta) {
+            rawOutput += delta;
+            streamBody.innerHTML = escHtml(rawOutput) + '<span class="stream-cursor"></span>';
+            streamBody.scrollTop = streamBody.scrollHeight;
+          }
+        } catch (_) {}
+      }
+    }
+
+    // Parse and render
+    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+    const parsed = parseOutput(rawOutput);
+    const hasStructured = parsed.bluf || parsed.steps.length > 0;
+
+    document.getElementById('streamPanel').style.display = 'none';
+
+    if (hasStructured) {
+      document.getElementById('blufCard').innerHTML = parsed.bluf ? renderBluf(parsed.bluf) : '';
+      document.getElementById('stepsContainer').innerHTML = parsed.steps.length ? renderSteps(parsed.steps) : '';
+      document.getElementById('resultTime').textContent = `Completed in ${elapsed}s · ${new Date().toLocaleTimeString()}`;
+      document.getElementById('resultsPanel').style.display = 'flex';
+    } else {
+      document.getElementById('rawPanel').textContent = rawOutput;
+      document.getElementById('rawPanel').style.display = 'block';
+    }
+
+  } catch (e) {
+    document.getElementById('streamPanel').style.display = 'none';
+    showError(e.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Analyze';
+  }
+}
+</script>
+</body>
+</html>
