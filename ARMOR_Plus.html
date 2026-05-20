@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARMOR Plus — DoD Acquisition Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f9f9f9;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --border2: #d1d5db;
+  --text: #111827;
+  --text2: #374151;
+  --text3: #6b7280;
+  --text4: #9ca3af;
+  --accent: #1a56db;
+  --accent2: #1e40af;
+  --accent-g: rgba(26,86,219,0.08);
+  --green: #059669;
+  --green-g: rgba(5,150,105,0.08);
+  --green-b: rgba(5,150,105,0.2);
+  --amber: #d97706;
+  --amber-g: rgba(217,119,6,0.08);
+  --amber-b: rgba(217,119,6,0.2);
+  --red: #dc2626;
+  --red-g: rgba(220,38,38,0.06);
+  --red-b: rgba(220,38,38,0.2);
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow2: 0 4px 6px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.04);
+  --radius: 12px;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', sans-serif;
+}
+
+html, body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 60px;
+}
+.topbar-left { display: flex; align-items: center; gap: 12px; }
+.logo-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, #1a3a6b 0%, #2563eb 100%);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logo-mark span {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  color: white; letter-spacing: 0.5px;
+}
+.logo-text { display: flex; flex-direction: column; gap: 0; }
+.logo-name { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -0.2px; line-height: 1.2; }
+.logo-sub { font-size: 11px; color: var(--text3); font-weight: 400; }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.model-tag {
+  font-family: var(--mono); font-size: 10px; color: var(--text3);
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 4px 10px; border-radius: 6px; letter-spacing: 0.5px;
+}
+.status-indicator {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--green); font-weight: 500;
+}
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); animation: pulse 2s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+/* ── HERO ── */
+.hero {
+  text-align: center; padding: 52px 24px 32px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.hero-avatar {
+  width: 72px; height: 72px; border-radius: 20px;
+  background: linear-gradient(135deg, #1a3a6b 0%, #2563eb 100%);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(26,86,219,0.2);
+  margin-bottom: 4px;
+}
+.hero-avatar span {
+  font-family: var(--mono); font-size: 16px; font-weight: 500;
+  color: white; letter-spacing: 1px;
+}
+.hero-title { font-size: 24px; font-weight: 600; color: var(--text); letter-spacing: -0.3px; }
+.hero-byline { font-size: 13px; color: var(--text3); font-weight: 400; }
+.hero-desc {
+  font-size: 13px; color: var(--text3); max-width: 480px;
+  line-height: 1.65; text-align: center;
+}
+.check-row { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); }
+.check-icon { color: var(--green); font-size: 13px; }
+
+/* ── MAIN ── */
+.shell {
+  max-width: 720px; width: 100%; margin: 0 auto;
+  padding: 0 24px 80px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+/* ── API KEY ── */
+.api-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 14px 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.field-label { font-size: 12px; font-weight: 500; color: var(--text2); white-space: nowrap; flex-shrink: 0; }
+.key-input {
+  flex: 1; min-width: 180px;
+  background: var(--bg); border: 1px solid var(--border2);
+  border-radius: 8px; color: var(--text);
+  font-family: var(--mono); font-size: 12px;
+  padding: 8px 12px; outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.key-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-g); }
+.key-input::placeholder { color: var(--text4); }
+.key-status { font-size: 11px; color: var(--text4); white-space: nowrap; }
+.key-status.saved { color: var(--green); }
+.clear-btn {
+  background: transparent; border: 1px solid var(--border2);
+  border-radius: 6px; color: var(--text3); font-size: 11px;
+  font-weight: 500; padding: 5px 12px; cursor: pointer;
+  transition: all .15s; flex-shrink: 0;
+}
+.clear-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-g); }
+
+/* ── QUERY ── */
+.query-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.query-inner { padding: 16px 18px; display: flex; gap: 12px; align-items: flex-end; }
+.query-textarea {
+  flex: 1; background: transparent; border: none; outline: none; resize: none;
+  color: var(--text); font-family: var(--sans); font-size: 15px; font-weight: 400;
+  line-height: 1.6; min-height: 52px; max-height: 160px;
+}
+.query-textarea::placeholder { color: var(--text4); }
+.analyze-btn {
+  background: var(--accent); color: white; border: none;
+  border-radius: 8px; cursor: pointer;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  padding: 10px 20px; transition: background .15s, transform .1s, box-shadow .15s;
+  white-space: nowrap; flex-shrink: 0;
+}
+.analyze-btn:hover { background: var(--accent2); box-shadow: 0 4px 12px rgba(26,86,219,0.25); }
+.analyze-btn:active { transform: scale(0.98); }
+.analyze-btn:disabled { background: var(--text4); cursor: not-allowed; box-shadow: none; }
+
+/* DEMO QUESTIONS */
+.demo-row {
+  padding: 0 18px 14px; display: flex; gap: 8px; flex-wrap: wrap;
+  border-top: 1px solid var(--border); padding-top: 12px;
+}
+.demo-label { font-size: 11px; color: var(--text4); font-weight: 500; width: 100%; margin-bottom: 2px; }
+.demo-btn {
+  background: var(--bg); border: 1px solid var(--border2);
+  border-radius: 20px; color: var(--text2); font-size: 11px;
+  font-weight: 400; padding: 5px 14px; cursor: pointer;
+  transition: all .15s; text-align: left;
+}
+.demo-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-g); }
+
+/* ── ERROR ── */
+.error-card {
+  background: var(--red-g); border: 1px solid var(--red-b);
+  border-radius: var(--radius); padding: 12px 16px;
+  font-size: 13px; color: var(--red); display: flex; gap: 8px; align-items: flex-start;
+}
+
+/* ── STREAM ── */
+.stream-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  overflow: hidden; animation: fadeUp .25s ease;
+}
+.stream-header {
+  padding: 12px 18px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.stream-label { font-size: 12px; font-weight: 500; color: var(--text2); }
+.dots span {
+  display: inline-block; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent); margin: 0 2px; animation: dot 1.4s ease infinite;
+}
+.dots span:nth-child(2){animation-delay:.15s} .dots span:nth-child(3){animation-delay:.3s}
+@keyframes dot { 0%,80%,100%{opacity:.3;transform:scale(.6)} 40%{opacity:1;transform:scale(1)} }
+.stream-body {
+  padding: 16px 18px; font-family: var(--mono); font-size: 11px;
+  color: var(--text3); line-height: 1.9; white-space: pre-wrap; word-break: break-word;
+  max-height: 320px; overflow-y: auto;
+}
+.stream-cursor {
+  display: inline-block; width: 7px; height: 13px;
+  background: var(--accent); vertical-align: text-bottom;
+  margin-left: 2px; animation: blink .8s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ── RESULTS ── */
+.results { display: flex; flex-direction: column; gap: 0; animation: fadeUp .3s ease; }
+
+/* BLUF */
+.bluf-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom: none;
+  padding: 20px 22px;
+  border-top: 3px solid var(--green);
+}
+.bluf-card.conditional { border-top-color: var(--amber); }
+.bluf-card.non-definitive { border-top-color: var(--red); }
+.bluf-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.bluf-badge {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 4px;
+  background: var(--green-g); color: var(--green); border: 1px solid var(--green-b);
+}
+.bluf-badge.conditional { background: var(--amber-g); color: var(--amber); border-color: var(--amber-b); }
+.bluf-badge.non-definitive { background: var(--red-g); color: var(--red); border-color: var(--red-b); }
+.bluf-det { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--green); }
+.bluf-det.conditional { color: var(--amber); }
+.bluf-det.non-definitive { color: var(--red); }
+.bluf-text { font-size: 16px; font-weight: 400; color: var(--text); line-height: 1.6; margin-bottom: 10px; }
+.bluf-cite { font-family: var(--mono); font-size: 11px; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+.bluf-cite::before { content: '↳'; color: var(--text4); }
+
+/* STEPS */
+.steps-wrap { border: 1px solid var(--border); border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; }
+.step-item { border-top: 1px solid var(--border); background: var(--surface); }
+.step-item:first-child { border-top: none; }
+.step-toggle {
+  width: 100%; background: var(--surface); border: none; cursor: pointer;
+  display: flex; align-items: center; gap: 0; padding: 0;
+  text-align: left; transition: background .12s;
+}
+.step-toggle:hover { background: var(--bg); }
+.step-num {
+  padding: 12px 16px; min-width: 90px;
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase;
+  border-right: 1px solid var(--border); flex-shrink: 0;
+}
+.step-title {
+  flex: 1; padding: 12px 16px;
+  font-size: 12px; font-weight: 500; color: var(--text2);
+  text-transform: uppercase; letter-spacing: 0.3px;
+}
+.step-arrow {
+  padding: 12px 16px; font-size: 10px; color: var(--text4);
+  transition: transform .2s; flex-shrink: 0;
+}
+.step-arrow.open { transform: rotate(90deg); }
+.step-body {
+  background: var(--bg); border-top: 1px solid var(--border);
+  padding: 16px 20px; font-family: var(--mono); font-size: 11px;
+  color: var(--text3); line-height: 1.9; white-space: pre-wrap; word-break: break-word;
+}
+
+/* RUNGS */
+.rung-row { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 6px; }
+.rung-badge {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+  padding: 2px 6px; border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+}
+.rb-r { background: var(--green-g); color: var(--green); border: 1px solid var(--green-b); }
+.rb-u { background: var(--red-g); color: var(--red); border: 1px solid var(--red-b); }
+.rb-n { background: #f3f4f6; color: var(--text4); border: 1px solid var(--border); }
+.rb-s { background: var(--amber-g); color: var(--amber); border: 1px solid var(--amber-b); }
+.rung-text { font-size: 11px; color: var(--text3); line-height: 1.8; flex: 1; }
+
+/* SV */
+.sv-label { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin: 8px 0 6px; }
+.sv-row { display: flex; align-items: center; gap: 9px; margin-bottom: 5px; }
+.sv-badge { font-size: 9px; font-weight: 600; padding: 2px 7px; border-radius: 4px; flex-shrink: 0; }
+.sv-y { background: var(--green-g); color: var(--green); border: 1px solid var(--green-b); }
+.sv-n { background: var(--red-g); color: var(--red); border: 1px solid var(--red-b); }
+.sv-desc { font-size: 11px; color: var(--text3); }
+
+/* RAW */
+.raw-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px 22px;
+  font-family: var(--mono); font-size: 11px; color: var(--text3);
+  line-height: 1.9; white-space: pre-wrap; word-break: break-word;
+}
+
+/* FOOTER */
+.result-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: var(--surface);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+.result-time { font-size: 11px; color: var(--text4); }
+.copy-btn {
+  background: transparent; border: 1px solid var(--border2);
+  border-radius: 6px; color: var(--text3); font-size: 11px;
+  font-weight: 500; padding: 6px 14px; cursor: pointer; transition: all .15s;
+}
+.copy-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-g); }
+.copy-btn.copied { border-color: var(--green); color: var(--green); background: var(--green-g); }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo-mark"><span>A+</span></div>
+    <div class="logo-text">
+      <div class="logo-name">ARMOR Plus</div>
+      <div class="logo-sub">By Heath Gross &amp; John Wahl · WarU Collaborative</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="model-tag">GPT-4o</div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      Live
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-avatar"><span>A+</span></div>
+  <div class="hero-title">ARMOR Plus</div>
+  <div class="hero-byline">By heath gross · Using GPT-4o with ARMOR v3.1 methodology</div>
+  <div class="hero-desc">
+    Acquisition Regulation Mission Operations Resource — RFO FAR + DFARS RFO Class Deviations.
+    Built by John Wahl and Heath Gross, a WarU Collaborative supporting the acquisition workforce.
+  </div>
+  <div class="check-row">
+    <span class="check-icon">✓</span>
+    <span>CAC-defensible citations · Full STEP methodology · DoD acquisition workforce</span>
+  </div>
+</div>
+
+<!-- SHELL -->
+<div class="shell">
+
+  <!-- API KEY -->
+  <div class="api-card">
+    <span class="field-label">OpenAI API Key</span>
+    <input class="key-input" type="password" id="apiKey" placeholder="sk-..." autocomplete="off" />
+    <span class="key-status" id="keyStatus">Session only · Not stored</span>
+    <button class="clear-btn" onclick="clearKey()">Clear</button>
+  </div>
+
+  <!-- QUERY -->
+  <div class="query-card">
+    <div class="query-inner">
+      <textarea class="query-textarea" id="question"
+        placeholder="Ask anything about DoD acquisition regulations…"
+        rows="2"></textarea>
+      <button class="analyze-btn" id="analyzeBtn" onclick="runAnalysis()">Analyze</button>
+    </div>
+    <div class="demo-row">
+      <div class="demo-label">Demo questions</div>
+      <button class="demo-btn" onclick="setDemo(0)">Preaward debriefing deadline</button>
+      <button class="demo-btn" onclick="setDemo(1)">EPW interrogation by contractor</button>
+      <button class="demo-btn" onclick="setDemo(2)">FAR 52.246-21 in Germany</button>
+    </div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="error-card" id="errorPanel" style="display:none">
+    <span>⚠</span><span id="errorText"></span>
+  </div>
+
+  <!-- STREAM -->
+  <div class="stream-card" id="streamPanel" style="display:none">
+    <div class="stream-header">
+      <span class="stream-label">Reasoning</span>
+      <div class="dots"><span></span><span></span><span></span></div>
+    </div>
+    <div class="stream-body" id="streamBody"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="resultsPanel" style="display:none">
+    <div id="blufCard"></div>
+    <div class="steps-wrap" id="stepsWrap" style="display:none"></div>
+    <div class="result-footer" id="resultFooter">
+      <span class="result-time" id="resultTime"></span>
+      <button class="copy-btn" id="copyBtn" onclick="copyOutput()">Copy Output</button>
+    </div>
+  </div>
+
+  <!-- RAW FALLBACK -->
+  <div class="raw-card" id="rawPanel" style="display:none"></div>
+
+</div>
+
+<script>
+const SYSTEM_PROMPT = `SYSTEM — DoD Contracting Copilot (RFO FAR + DFARS RFO Class Deviations)
+
+IDENTITY: CAC-defensible RFO FAR/DFARS RFO analysis. Mandatory STEP methodology, traceable citations. No default CO responsibility unless text assigns it. Tone: WarU professor.
+
+USERS: COs, CORs, PMs, DAU students, acquisition workforce, VOSBs.
+
+SOURCE RESTRICTION (HARD LIMIT): Reason from RFO FAR (effective March 16 2026) and DFARS RFO class deviations through FY26. No .com/.org/.net/.edu sources. Pre-RFO FAR training memory = UTR -> HARD STOP.
+
+DEFAULTS: DoD always assumed. No 52.2/252.2 cites — use prescription/policy outside those subparts. One controlling cite, exact paragraph. No "see also." Document in STEP 4.
+
+NO STEP SKIPPING (HARD): TWO-PASS GATE->RUNGS 1-8->VERIFICATION LOOP->FINALIZATION GATE->BLUF->STEPS 1-7->VALIDATION. ALL types including TYPE 3 — NEVER answer conversationally. Full STEP template always required.
+
+FINALIZATION GATE (HARD STOP): Pass 1 + Pass 2 + Conventions a-f logged + SELF-VERIFICATION Y/Y/Y.
+
+SELF-VERIFICATION (HARD STOP): Re-read source. (1)Operative sentence supports BLUF? (2)Regulatory verb matches determination? (3)Cite applies to this fact pattern? Any NO -> restart Pass 1. Log Y/Y/Y in STEP 5 to proceed.
+
+BLUF (STEP 0): Determination (Definitive/Conditional/Non-Definitive) + controlling citation.
+
+QUESTION TYPES (classify first): TYPE 1-PROCEDURAL: shall/must/steps/how -> cite shall/must. TYPE 2-APPLICABILITY: apply/covered/when -> prefer "applies to..." sentence, mirror keyword. TYPE 3-DEFINITIONAL: what is/define -> definition/scope paragraph. All types: full STEP template required, BLUF first, no conversational prose.
+
+TEXT-FIDELITY: Quote operative sentence (<=25 words). Mirror regulatory verb. No inferential elevation. Tie-breaker: Responsibility>task; Specific>general. Definitions = supporting only unless Type 3.
+
+TWO-PASS GATE (never open with clause named in question):
+
+PASS 1 -- ZOOM OUT (log all; no answers yet):
+P1-A: Classify type (1/2/3). P1-B: RFO FAR/DFARS RFO subpart scope. P1-C: DFARS RFO overlay displacing RFO FAR. P1-D: Active deviation: "in lieu of"/"use attached"/"replace"? Found -> deviation controls. P1-E: Title Trap: cite in General/Scope/Purpose/Definitions? STOP. Type 2 exception: "applies to..." in Scope eligible if no more specific paragraph. P1-F: No named actor -> flag Conventions(a-f).
+
+PASS 2 -- DRILL DOWN (only after Pass 1 complete):
+DoD CLAUSE STACK: (1)DFARS RFO applicability (2)DFARS RFO prescription (3)Active deviation -> attachment text (4)DFARS RFO PGI (5)Base clause only if no deviation overrides.
+P2-A: "in lieu of"/"use attached"/"replace"? YES -> deviation controls. STOP. P2-B: Most specific paragraph. P2-C: Run Conventions(a-f) if flagged in P1-F. Log A/N/U each.
+
+VERIFICATION LOOP (all 7 -- HARD STOP):
+1. Definitional cite non-Type 3 -> REJECT. 2. Title=General/Scope/Purpose/Definitions -> REJECT (Type 2 exception). 3. More specific section? -> It controls. 4. Conventions(a-f) logged? No -> REJECT. 5. Never "silent" unless Conventions logged+none resolves. 6. DFARS RFO checked for DoD overlay? No -> REJECT. 7. Deviation trigger checked? No -> REJECT.
+Any fail -> restart. Log in STEP 4.
+
+ZOOM-OUT (STEP 3A -- 6 REQUIRED, MISSING ANY = FAILED):
+(1)PART BOUNDARY: RFO FAR/DFARS RFO Part + adjacent. (2)SUBPART WALK: Sections to cited paragraph. (3)DFARS RFO OVERLAY: Supplementing/displacing RFO FAR. (4)SUBSECTION FLAG: Most specific paragraph confirmed? (5)DEVIATION OVERRIDE: Active deviation? Log found/not found/UTR. (6)NARRATIVE IMPACT: 1-3 sentences on sequence, overlay, deviation effect.
+
+FAILURE: Never terminate. Mark UTR, continue, downgrade, flag STEP 7. UTR any rung -> STEP 7 genuine unknown. CONDITIONS: UTR/conflict->Conditional. No controlling sentence->Non-Definitive.
+
+STEP 7: Genuine unknowns only. Never confirm stated facts. Deadline questions -> flag agency filing hour if not stated in fact pattern.
+
+OUTPUT (exact template — never deviate):
+
+0) BLUF -- [Definitive/Conditional/Non-Definitive] [one sentence + citation]
+
+STEP 1 -- Acquisition Facts: [one sentence or N/A]
+
+STEP 2 -- Regulatory Framework: RFO FAR->SAAD->DFARS RFO CDs->SAAD->Other CDs->PGI->RFO Fetch->RFO FAR Conventions
+[Active rungs: Reviewed/Fast. N/T in brackets.]
+
+STEP 3A -- Zoom-Out ([Part name])
+- Part boundary: [before/after] | Subpart walk: [sections to cited paragraph] | DFARS RFO overlay: [subpart]
+- Subsection flag: [confirmed/flagged] | Deviation override: [found/not found/UTR+basis]
+- Impact: [1-3 sentences]
+
+STEP 3B -- Rungs
+1. RFO FAR -- [R/UTR/N/T]: [sentence]. 2. RFO FAR SAAD -- [R/UTR/Checked/Silent]: [sentence].
+3. DFARS RFO CDs -- [R/UTR/N/T]: [sentence].
+4. DFARS RFO SAAD -- [R/UTR/Checked/Silent]: [sentence]. 5. Other DFARS RFO CDs -- [R/UTR/N/T]: [sentence].
+6. DFARS PGI -- [R/UTR]: [sentence].
+7. RFO Fetch -- [R/UTR/N/T]: [sentence].
+8. RFO FAR Conventions -- Reviewed: a[A/N/U] b[A/N/U] c[A/N/U] d[A/N/U] e[A/N/U] f[A/N/U] | [sentence].
+
+STEP 4 -- Synthesis: [2-3 sentences]
+
+STEP 5 -- Final Receipt
+- Cite: [cite] | Excerpt: "[<=25 words]" | Why: [sentence]
+- P1: A[type] B[subpart] C[DFARS RFO overlay] D[deviation] E[title trap] F[conventions]
+- P2: Stack followed | "in lieu of"[found/not found] | text source
+- Self-Verification: (1)[Y/N] (2)[Y/N] (3)[Y/N] — all Y required.
+
+STEP 6 -- Final Determination: [one sentence]
+
+STEP 7 -- User Validation Required
+1. [genuine unknown only — or N/A]
+
+DFARS RFO>RFO FAR (DoD). Apply RFO FAR effective March 16 2026 and DFARS RFO class deviations through FY26.`;
+
+const DEMO_QUESTIONS = [
+  "If an offeror receives notice of its exclusion from the competition on Wednesday, August 30, 2023, what would be the deadline for requesting a preaward debriefing?",
+  "Can an enemy prisoner of war be interrogated by contractor personnel?",
+  "Should the clause at FAR 52.246-21, Warranty of Construction, be used in a fixed-price construction contract that will be performed in Germany?"
+];
+
+let rawOutput = '';
+
+// ── INIT ──────────────────────────────────────────────────
+window.addEventListener('load', function() {
+  const saved = sessionStorage.getItem('armor_openai_key');
+  if (saved) { document.getElementById('apiKey').value = saved; setKeyStatus('loaded'); }
+
+  document.getElementById('apiKey').addEventListener('input', function() {
+    const val = this.value.trim();
+    if (val.startsWith('sk-') && val.length > 20) {
+      sessionStorage.setItem('armor_openai_key', val);
+      setKeyStatus('saved');
+    } else {
+      sessionStorage.removeItem('armor_openai_key');
+      setKeyStatus('default');
+    }
+  });
+
+  document.getElementById('question').addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 160) + 'px';
+  });
+
+  document.getElementById('question').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) runAnalysis();
+  });
+});
+
+function setKeyStatus(state) {
+  const el = document.getElementById('keyStatus');
+  if (state === 'saved') { el.textContent = '✓ Saved for session'; el.className = 'key-status saved'; }
+  else if (state === 'loaded') { el.textContent = '✓ Key loaded'; el.className = 'key-status saved'; }
+  else { el.textContent = 'Session only · Not stored'; el.className = 'key-status'; }
+}
+
+function clearKey() {
+  sessionStorage.removeItem('armor_openai_key');
+  document.getElementById('apiKey').value = '';
+  setKeyStatus('default');
+}
+
+function setDemo(i) {
+  const ta = document.getElementById('question');
+  ta.value = DEMO_QUESTIONS[i];
+  ta.style.height = 'auto';
+  ta.style.height = Math.min(ta.scrollHeight, 160) + 'px';
+  ta.focus();
+}
+
+// ── UTILITIES ─────────────────────────────────────────────
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function hideAll() {
+  ['errorPanel','streamPanel','resultsPanel','rawPanel'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+}
+function showError(msg) {
+  document.getElementById('errorPanel').style.display = 'flex';
+  document.getElementById('errorText').textContent = msg;
+}
+function copyOutput() {
+  navigator.clipboard.writeText(rawOutput).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Output'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ── PARSE ─────────────────────────────────────────────────
+function parseOutput(raw) {
+  const text = raw.replace(/\*\*/g, '');
+  const result = { bluf: null, steps: [] };
+  for (const p of [
+    /0\)\s*BLUF\s*[-–—]+\s*([\s\S]*?)(?=\nSTEP\s+1\s*[-–—])/i,
+    /BLUF\s*[-–—]+\s*([\s\S]*?)(?=\nSTEP\s+1\s*[-–—])/i,
+  ]) { const m = text.match(p); if (m) { result.bluf = m[1].trim(); break; } }
+  const re = /\nSTEP\s+(\d+[AB]?)\s*[-–—]+\s*([^\n]+)\n([\s\S]*?)(?=\nSTEP\s+\d+[AB]?\s*[-–—]|$)/gi;
+  let m;
+  while ((m = re.exec('\n' + text)) !== null) {
+    const c = m[3].trim();
+    if (c) result.steps.push({ num: m[1], title: m[2].trim(), content: c });
+  }
+  return result;
+}
+
+// ── RENDER ────────────────────────────────────────────────
+function getRungTag(line) {
+  if (/--\s*\[?R\]?\s*:|--\s*R\s*:/.test(line) && !/UTR/.test(line)) return 'r';
+  if (/--\s*\[?UTR\]?\s*:|\bUTR\b/.test(line)) return 'u';
+  if (/--\s*\[?N\/T\]?\s*:|\bN\/T\b/.test(line)) return 'n';
+  if (/Checked\/Silent|\bSilent\b/.test(line)) return 's';
+  return null;
+}
+
+function renderRungs(content) {
+  const labels = { r:'REVIEWED', u:'UTR', n:'N/T', s:'SILENT' };
+  return content.split('\n').map(line => {
+    if (!line.trim()) return '<div style="height:5px"></div>';
+    const tag = getRungTag(line);
+    if (!tag) return `<div style="margin-bottom:4px;font-size:11px;color:var(--text3);line-height:1.8">${escHtml(line)}</div>`;
+    const clean = line.replace(/--\s*\[?(REVIEWED|R|UTR|N\/T|Checked\/Silent|Silent)\]?:?\s*/i,'').replace(/^\d+\.\s*/,'').trim();
+    return `<div class="rung-row"><span class="rung-badge rb-${tag}">${labels[tag]}</span><span class="rung-text">${escHtml(clean)}</span></div>`;
+  }).join('');
+}
+
+function renderSV(content) {
+  const defs = [
+    { re:/\(1\)\s*\[?(Y|N)\]?/i, label:'Operative sentence supports BLUF' },
+    { re:/\(2\)\s*\[?(Y|N)\]?/i, label:'Regulatory verb confirmed' },
+    { re:/\(3\)\s*\[?(Y|N)\]?/i, label:'Fact pattern match confirmed' },
+  ];
+  const found = defs.map(d => { const m = content.match(d.re); return m ? {label:d.label,v:m[1].toUpperCase()} : null; }).filter(Boolean);
+  if (!found.length) return `<div style="font-size:11px;color:var(--text3)">${escHtml(content)}</div>`;
+  return `<div class="sv-label">Self-Verification</div>${found.map(f=>`<div class="sv-row"><span class="sv-badge ${f.v==='Y'?'sv-y':'sv-n'}">${f.v}</span><span class="sv-desc">${escHtml(f.label)}</span></div>`).join('')}`;
+}
+
+function renderStepContent(num, content) {
+  if (num === '3B') return renderRungs(content);
+  if (/self-verification/i.test(content)) {
+    const idx = content.search(/self-verification/i);
+    const pre = content.slice(0, idx).trim();
+    const sv = content.slice(idx).replace(/self-verification:?\s*/i,'').trim();
+    return `${pre ? `<div style="margin-bottom:12px;white-space:pre-wrap">${escHtml(pre)}</div>` : ''}${renderSV(sv)}`;
+  }
+  return escHtml(content);
+}
+
+function renderBluf(content) {
+  const l = content.toLowerCase();
+  const type = l.includes('non-definitive') ? 'non-definitive' : l.includes('conditional') ? 'conditional' : '';
+  const label = l.includes('non-definitive') ? 'NON-DEFINITIVE' : l.includes('conditional') ? 'CONDITIONAL' : 'DEFINITIVE';
+  const cite = (content.match(/((?:RFO\s+FAR|DFARS\s+RFO)\s+[\d.()a-z-]+)/i)||[])[1]||'';
+  const clean = content.replace(/^(Definitive|Conditional|Non-Definitive)[.:]\s*/i,'').trim();
+  return `<div class="bluf-card ${type}">
+    <div class="bluf-meta">
+      <span class="bluf-badge ${type}">BLUF</span>
+      <span class="bluf-det ${type}">${label}</span>
+    </div>
+    <div class="bluf-text">${escHtml(clean)}</div>
+    ${cite ? `<div class="bluf-cite">${escHtml(cite)}</div>` : ''}
+  </div>`;
+}
+
+function renderSteps(steps) {
+  const defaultOpen = ['3B','5','6','7'];
+  return steps.map((s, i) => {
+    const open = defaultOpen.includes(s.num);
+    const id = `s${i}`;
+    return `<div class="step-item">
+      <button class="step-toggle" onclick="toggleStep('${id}')">
+        <span class="step-num">Step ${escHtml(s.num)}</span>
+        <span class="step-title">${escHtml(s.title)}</span>
+        <span class="step-arrow ${open?'open':''}" id="${id}a">▶</span>
+      </button>
+      <div class="step-body" id="${id}b" style="${open?'':'display:none'}">${renderStepContent(s.num, s.content)}</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleStep(id) {
+  const b = document.getElementById(id+'b');
+  const a = document.getElementById(id+'a');
+  const open = b.style.display !== 'none';
+  b.style.display = open ? 'none' : 'block';
+  a.classList.toggle('open', !open);
+}
+
+// ── MAIN ──────────────────────────────────────────────────
+async function runAnalysis() {
+  const key = document.getElementById('apiKey').value.trim();
+  const question = document.getElementById('question').value.trim();
+  if (!key) { hideAll(); showError('OpenAI API key required.'); return; }
+  if (!question) { hideAll(); showError('Enter a question.'); return; }
+
+  hideAll();
+  rawOutput = '';
+  const t0 = Date.now();
+  const btn = document.getElementById('analyzeBtn');
+  btn.disabled = true; btn.textContent = 'Analyzing…';
+
+  document.getElementById('streamPanel').style.display = 'block';
+  const streamBody = document.getElementById('streamBody');
+  streamBody.innerHTML = '';
+
+  try {
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${key}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o',
+        stream: true,
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content: question }
+        ],
+      }),
+    });
+
+    if (!res.ok) {
+      const e = await res.json().catch(() => ({}));
+      throw new Error(e.error?.message || `API error ${res.status}`);
+    }
+
+    const reader = res.body.getReader();
+    const dec = new TextDecoder();
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      for (const line of dec.decode(value).split('\n')) {
+        if (!line.startsWith('data: ')) continue;
+        const data = line.slice(6).trim();
+        if (!data || data === '[DONE]') continue;
+        try {
+          const j = JSON.parse(data);
+          const delta = j.choices?.[0]?.delta?.content || '';
+          if (delta) {
+            rawOutput += delta;
+            streamBody.innerHTML = escHtml(rawOutput) + '<span class="stream-cursor"></span>';
+            streamBody.scrollTop = streamBody.scrollHeight;
+          }
+        } catch (_) {}
+      }
+    }
+
+    const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
+    const parsed = parseOutput(rawOutput);
+    const hasStructured = parsed.bluf || parsed.steps.length > 0;
+    document.getElementById('streamPanel').style.display = 'none';
+
+    if (hasStructured) {
+      document.getElementById('blufCard').innerHTML = parsed.bluf ? renderBluf(parsed.bluf) : '';
+      const sw = document.getElementById('stepsWrap');
+      if (parsed.steps.length > 0) { sw.innerHTML = renderSteps(parsed.steps); sw.style.display = 'block'; }
+      else { sw.style.display = 'none'; }
+      document.getElementById('resultTime').textContent = `Completed in ${elapsed}s · ${new Date().toLocaleTimeString()}`;
+      document.getElementById('resultsPanel').style.display = 'flex';
+    } else {
+      document.getElementById('rawPanel').textContent = rawOutput;
+      document.getElementById('rawPanel').style.display = 'block';
+    }
+
+  } catch (e) {
+    document.getElementById('streamPanel').style.display = 'none';
+    showError(e.message);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Analyze';
+  }
+}
+</script>
+</body>
+</html>
