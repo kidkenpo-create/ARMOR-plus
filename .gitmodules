@@ -1,0 +1,6 @@
+[submodule "data/far"]
+	path = data/far
+	url = https://github.com/GSA/GSA-Acquisition-FAR.git
+[submodule "data/dfars"]
+	path = data/dfars
+	url = https://github.com/GSA/GSA-Acquisition-DFARS.git
