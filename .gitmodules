@@ -1,6 +1,6 @@
-[submodule "data/far"]
-	path = data/far
+[submodule "data/legacy-crosswalk/far"]
+	path = data/legacy-crosswalk/far
 	url = https://github.com/GSA/GSA-Acquisition-FAR.git
-[submodule "data/dfars"]
-	path = data/dfars
+[submodule "data/legacy-crosswalk/dfars"]
+	path = data/legacy-crosswalk/dfars
 	url = https://github.com/GSA/GSA-Acquisition-DFARS.git
