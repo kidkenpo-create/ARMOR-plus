@@ -5,7 +5,9 @@
     "expected": {
       "answer": "No",
       "issue_family": "motor_vehicle_lease_certification",
+      "current_reference": "RFO FAR 8.101",
       "classroom_reference": "FAR 8.1100",
+      "legacy_crosswalk_only": true,
       "scope_gate": "FAR 8.1100",
       "reject_as_controlling": ["DFARS 207.401"]
     }
@@ -26,8 +28,9 @@
     "expected": {
       "answer": "No",
       "issue_family": "multiyear_congressional_notification",
+      "current_reference": "RFO FAR 17.104-3(a) and DFARS RFO 217.104-370(b)(1)(iv)",
       "classroom_reference": "FAR 17.108(b) or DFARS 217.170(d)(1)(iv)",
-      "current_reference": "DFARS RFO 217.104-370(b)(1)(iv)"
+      "legacy_crosswalk_only": true
     }
   },
   {
@@ -76,9 +79,11 @@
     "id": "construction_estimate_handling",
     "question": "You are the contracting officer for an unclassified construction contract to be performed in Nebraska. Which statement is true regarding how the Government estimate of construction costs will be handled?",
     "expected": {
-      "answer": "The Government estimate will be designated as For Official Use Only.",
+      "answer": "The Government estimate will be designated as CUI unless the information is classified.",
       "issue_family": "construction_estimate_handling",
-      "classroom_reference": "DFARS PGI 236.203(1)"
+      "current_reference": "DFARS RFO PGI 236.101-6(1)",
+      "classroom_reference": "DFARS PGI 236.203(1)",
+      "legacy_crosswalk_only": true
     }
   },
   {
@@ -105,7 +110,9 @@
     "expected": {
       "answer": "Generally prohibited, but Secretary of Defense may waive for 60 days.",
       "issue_family": "detainee_interrogation_contractor_personnel",
-      "classroom_reference": "DFARS 237.173-4"
+      "current_reference": "DFARS RFO 237.873-4",
+      "classroom_reference": "DFARS 237.173-4",
+      "legacy_crosswalk_only": true
     }
   },
   {
@@ -141,6 +148,7 @@
     "expected": {
       "answer": "Yes",
       "issue_family": "contingency_contractor_personnel_clause_deviation",
+      "current_reference": "CD 2017-O0004 and DFARS RFO 252.225-7995",
       "classroom_reference": "CD 2017-O0004"
     }
   },
@@ -150,7 +158,9 @@
     "expected": {
       "answer": "No",
       "issue_family": "military_flight_simulator_waiver",
-      "classroom_reference": "DFARS 237.102-71(b)"
+      "current_reference": "DFARS RFO 237.802-71(b)",
+      "classroom_reference": "DFARS 237.102-71(b)",
+      "legacy_crosswalk_only": true
     }
   },
   {
@@ -159,7 +169,9 @@
     "expected": {
       "answer": "Yes",
       "issue_family": "subcontractor_sdb_representation",
-      "classroom_reference": "FAR 19.703(a)(2)(i)"
+      "current_reference": "RFO FAR 19.302-2(a)(1)(ii)(A)",
+      "classroom_reference": "FAR 19.703(a)(2)(i)",
+      "legacy_crosswalk_only": true
     }
   },
   {

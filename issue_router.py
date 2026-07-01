@@ -6,6 +6,16 @@ from dataclasses import dataclass
 from armor_types import IssueProfile, SourceRequest
 
 
+"""
+Historical regression helper only.
+
+This file may contain legacy classroom/crosswalk citations so older test
+questions can be mapped to current RFO authority. Do not treat
+classroom_reference values as final ARMOR authority. Final answers must route
+to RFO FAR, DFARS RFO, DFARS RFO PGI, or approved class-deviation sources.
+"""
+
+
 @dataclass(frozen=True)
 class IssueRule:
     issue_family: str
@@ -34,14 +44,14 @@ ISSUE_RULES: tuple[IssueRule, ...] = (
             "before",
             "solicitation",
         ),
-        route_first=("RFO FAR 8.1100", "RFO FAR 8.1102"),
+        route_first=("RFO FAR 8.101",),
         classroom_reference="FAR 8.1100",
-        current_reference="RFO FAR 8.1100",
-        scope_gate="RFO FAR 8.1100",
+        current_reference="RFO FAR 8.101",
+        scope_gate="RFO FAR 8.101",
         reject_as_controlling=("DFARS RFO 207.401",),
         notes=(
             "This is a motor-vehicle certification issue, not a lease-or-purchase justification issue.",
-            "Check the RFO FAR 8.11 scope gate before the certification rule.",
+            "Legacy FAR subpart 8.11 is crosswalk/background only; current RFO routing uses RFO FAR 8.101.",
         ),
     ),
     IssueRule(
@@ -80,13 +90,13 @@ ISSUE_RULES: tuple[IssueRule, ...] = (
             "award",
             "contract",
         ),
-        route_first=("RFO FAR 17.108(b)", "DFARS RFO 217.170(d)(1)(iv)", "RFO FAR 17.104-3"),
+        route_first=("RFO FAR 17.104-3(a)", "DFARS RFO 217.104-370(b)(1)(iv)"),
         classroom_reference="FAR 17.108(b) or DFARS 217.170(d)(1)(iv)",
         current_reference="DFARS RFO 217.104-370(b)(1)(iv)",
         scope_gate=None,
         reject_as_controlling=("RFO FAR 17.104-3(a)-(c)",),
         notes=(
-            "Preserve exact paragraph level for the class reference.",
+            "Legacy FAR 17.108(b) and DFARS 217.170(d)(1)(iv) are crosswalk/background only.",
             "A cancellation ceiling exactly equal to $20 million does not exceed $20 million.",
         ),
     ),
@@ -104,11 +114,11 @@ ISSUE_RULES: tuple[IssueRule, ...] = (
     IssueRule(
         issue_family="construction_estimate_handling",
         required_any=("government estimate", "estimate of construction", "construction costs"),
-        weighted_triggers=("construction", "unclassified", "nebraska", "for official use only", "bids", "estimate"),
-        route_first=("DFARS PGI 236.203(1)", "RFO FAR 36.203", "DFARS RFO 236.203"),
+        weighted_triggers=("construction", "unclassified", "nebraska", "for official use only", "cui", "bids", "estimate"),
+        route_first=("DFARS RFO PGI 236.101-6(1)", "RFO FAR 36.203", "DFARS RFO 236.101-6"),
         classroom_reference="DFARS PGI 236.203(1)",
-        current_reference="DFARS PGI 236.203(1)",
-        notes=("Handling/marking of DoD construction estimates routes to PGI, not only RFO FAR 36.203.",),
+        current_reference="DFARS RFO PGI 236.101-6(1)",
+        notes=("Handling/marking of DoD construction estimates routes to current PGI CUI language, not stale FOUO/236.203 text.",),
     ),
     IssueRule(
         issue_family="delegation_of_authority",
@@ -132,9 +142,9 @@ ISSUE_RULES: tuple[IssueRule, ...] = (
         issue_family="detainee_interrogation_contractor_personnel",
         required_any=("enemy prisoner of war", "detainee"),
         weighted_triggers=("interrogated", "interrogate", "contractor personnel", "secretary of defense", "waiver", "60 days"),
-        route_first=("DFARS RFO 237.173-4", "DFARS RFO 237.173-3(a)", "DFARS RFO 237.173-2"),
+        route_first=("DFARS RFO 237.873-4", "DFARS RFO 237.873-3(a)", "DFARS RFO 237.873-2"),
         classroom_reference="DFARS 237.173-4",
-        current_reference="DFARS RFO 237.173-4",
+        current_reference="DFARS RFO 237.873-4",
         notes=("Answer includes the general prohibition and the 60-day Secretary of Defense waiver.",),
     ),
     IssueRule(
@@ -149,7 +159,7 @@ ISSUE_RULES: tuple[IssueRule, ...] = (
         notes=(
             "In classroom mode, DoD is assumed; do not treat DoD status as unknown.",
             "For DoD, RFO FAR 27.400/DFARS RFO 227.400 controls before the RFO FAR 52.227-14 prescription.",
-            "Expected classroom answer is No when the question asks whether RFO FAR 52.227-14 is required for DoD technical data.",
+            "RFO-first expected result is No when the question asks whether RFO FAR 52.227-14 is required for DoD technical data.",
         ),
     ),
     IssueRule(
@@ -176,29 +186,29 @@ ISSUE_RULES: tuple[IssueRule, ...] = (
         issue_family="contingency_contractor_personnel_clause_deviation",
         required_any=("252.225-7040", "contractor personnel supporting"),
         weighted_triggers=("qatar", "centcom", "contingency operation", "maintenance contract", "8,500,000", "outside the united states"),
-        route_first=("CD 2017-O0004", "DFARS RFO 225.371-5(a)"),
+        route_first=("CD 2017-O0004", "DFARS RFO 252.225-7995"),
         classroom_reference="CD 2017-O0004",
         current_reference="CD 2017-O0004",
         reject_as_controlling=("DFARS RFO 225.371-5(a)",),
-        notes=("Class deviation is the expected controlling authority for this classroom question.",),
+        notes=("Class deviation and current substituted clause text control; stale DFARS RFO 225.371-5(a) is crosswalk/background only.",),
     ),
     IssueRule(
         issue_family="military_flight_simulator_waiver",
         required_any=("military flight simulator",),
         weighted_triggers=("service contract", "secretary of defense", "waiver", "without getting a waiver"),
-        route_first=("DFARS RFO 237.102-71(b)", "PGI 237.102-71"),
+        route_first=("DFARS RFO 237.802-71(b)", "DFARS RFO PGI 237.802-71"),
         classroom_reference="DFARS 237.102-71(b)",
-        current_reference="DFARS RFO 237.102-71(b)",
+        current_reference="DFARS RFO 237.802-71(b)",
         notes=("The prohibition/waiver rule controls; PGI is supporting waiver process.",),
     ),
     IssueRule(
         issue_family="subcontractor_sdb_representation",
         required_any=("subcontractor", "small disadvantaged business"),
         weighted_triggers=("written representations", "size", "socioeconomic status", "current", "accurate", "complete", "prime contractor"),
-        route_first=("RFO FAR 19.703(a)(2)(i)",),
+        route_first=("RFO FAR 19.302-2(a)(1)(ii)(A)",),
         classroom_reference="FAR 19.703(a)(2)(i)",
-        current_reference="RFO FAR 19.703(a)(2)(i)",
-        notes=("Prime may accept written representation unless it has reason to question it.",),
+        current_reference="RFO FAR 19.302-2(a)(1)(ii)(A)",
+        notes=("Prime may accept written representation unless it has reason to question it; legacy FAR 19.703 is crosswalk/background only.",),
     ),
     IssueRule(
         issue_family="assignment_of_claims_nonpersonal_services",
