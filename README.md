@@ -29,3 +29,6 @@ Agents indexing this repository should read `AGENT.md` and `README_FOR_GENAI.md`
 
 If current RFO authority cannot be retrieved, mark the source as UTR instead of answering from legacy FAR/DFARS.
 
+## Historical Helper Files
+
+Files such as `issue_router.py` and `acquisition_regression_cases.json` preserve legacy classroom/crosswalk citations so older training questions can be mapped to current RFO authority. These files are not standalone answer authority. When they mention a legacy FAR/DFARS citation, treat it as crosswalk context only and verify the final answer against the current RFO FAR, DFARS RFO, DFARS RFO PGI, or approved class-deviation source.
